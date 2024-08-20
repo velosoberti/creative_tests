@@ -7,7 +7,7 @@
 #### In this work, I developed a new Python class with various functions to construct and evaluate a linear regression model using two arrays: x and y.
 
 <p align="center">
-  <a href="https://github.com/velosoberti/DataScience/blob/main/Projeto_Estatistica_Inferencial_Python.ipynb" style="
+  <a href="https://github.com/velosoberti/creative_tests/blob/main/Linear%20Regression%20-%20Manual%20Function.ipynb" style="
     display: inline-block;
     padding: 10px 20px;
     font-size: 16px;
