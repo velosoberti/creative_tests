@@ -1,0 +1,1967 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<title>Lasso &amp; Ridget Regressions</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Cambria;
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;}
+ /* Style Definitions */
+ h1
+	{margin-top:24.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	page-break-after:avoid;
+	font-size:16.0pt;
+	font-family:"Calibri",sans-serif;
+	color:#4F81BD;}
+h2
+	{margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Calibri",sans-serif;
+	color:#4F81BD;}
+h3
+	{margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Calibri",sans-serif;
+	color:#4F81BD;}
+h4
+	{margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Calibri",sans-serif;
+	color:#4F81BD;
+	font-weight:normal;
+	font-style:italic;}
+p.MsoTitle, li.MsoTitle, div.MsoTitle
+	{margin-top:24.0pt;
+	margin-right:0cm;
+	margin-bottom:12.0pt;
+	margin-left:0cm;
+	text-align:center;
+	page-break-after:avoid;
+	font-size:18.0pt;
+	font-family:"Calibri",sans-serif;
+	color:#345A8A;
+	font-weight:bold;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin-top:9.0pt;
+	margin-right:0cm;
+	margin-bottom:9.0pt;
+	margin-left:0cm;
+	font-size:12.0pt;
+	font-family:"Cambria",serif;}
+p.MsoDate, li.MsoDate, div.MsoDate
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	text-align:center;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Cambria",serif;}
+a:link, span.MsoHyperlink
+	{color:#4F81BD;}
+p.FirstParagraph, li.FirstParagraph, div.FirstParagraph
+	{mso-style-name:"First Paragraph";
+	margin-top:9.0pt;
+	margin-right:0cm;
+	margin-bottom:9.0pt;
+	margin-left:0cm;
+	font-size:12.0pt;
+	font-family:"Cambria",serif;}
+p.Author, li.Author, div.Author
+	{mso-style-name:Author;
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	text-align:center;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Cambria",serif;}
+span.VerbatimChar
+	{mso-style-name:"Verbatim Char";
+	mso-style-link:"Source Code";
+	font-family:Consolas;}
+p.SourceCode, li.SourceCode, div.SourceCode
+	{mso-style-name:"Source Code";
+	mso-style-link:"Verbatim Char";
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	background:#F8F8F8;
+	word-break:break-all;
+	font-size:12.0pt;
+	font-family:"Cambria",serif;}
+span.DecValTok
+	{mso-style-name:DecValTok;
+	font-family:Consolas;
+	color:#0000CF;
+	background:#F8F8F8;}
+span.FloatTok
+	{mso-style-name:FloatTok;
+	font-family:Consolas;
+	color:#0000CF;
+	background:#F8F8F8;}
+span.ConstantTok
+	{mso-style-name:ConstantTok;
+	font-family:Consolas;
+	color:#8F5902;
+	background:#F8F8F8;}
+span.SpecialCharTok
+	{mso-style-name:SpecialCharTok;
+	font-family:Consolas;
+	color:#CE5C00;
+	background:#F8F8F8;
+	font-weight:bold;}
+span.StringTok
+	{mso-style-name:StringTok;
+	font-family:Consolas;
+	color:#4E9A06;
+	background:#F8F8F8;}
+span.CommentTok
+	{mso-style-name:CommentTok;
+	font-family:Consolas;
+	color:#8F5902;
+	background:#F8F8F8;
+	font-style:italic;}
+span.OtherTok
+	{mso-style-name:OtherTok;
+	font-family:Consolas;
+	color:#8F5902;
+	background:#F8F8F8;}
+span.FunctionTok
+	{mso-style-name:FunctionTok;
+	font-family:Consolas;
+	color:#204A87;
+	background:#F8F8F8;
+	font-weight:bold;}
+span.ControlFlowTok
+	{mso-style-name:ControlFlowTok;
+	font-family:Consolas;
+	color:#204A87;
+	background:#F8F8F8;
+	font-weight:bold;}
+span.AttributeTok
+	{mso-style-name:AttributeTok;
+	font-family:Consolas;
+	color:#204A87;
+	background:#F8F8F8;}
+span.NormalTok
+	{mso-style-name:NormalTok;
+	font-family:Consolas;
+	background:#F8F8F8;}
+.MsoChpDefault
+	{font-size:12.0pt;}
+.MsoPapDefault
+	{margin-bottom:10.0pt;}
+ /* Page Definitions */
+ @page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:70.85pt 3.0cm 70.85pt 3.0cm;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body lang=PT-BR link="#4F81BD" vlink=purple style='word-wrap:break-word'>
+
+<div class=WordSection1>
+
+<p class=MsoTitle align=left style='text-align:left'><span lang=EN-US>Lasso &amp;
+Ridget Regressions</span></p>
+
+<p class=Author align=left style='text-align:left'><span lang=EN-US>Luis
+Henrique Berti Veloso – Data Science</span></p>
+
+<p class=MsoDate align=left style='text-align:left'><span lang=EN-US>2024-09-02</span></p>
+
+<h1><a name=X067c256d5d006bac4928cd8c8f2cc7bba546a71><span lang=EN-US>Lasso e
+Ridget Penalty for Regressions models</span></a></h1>
+
+<p class=FirstParagraph><a
+href="https://aimadeimage.net/wp-content/uploads/2023/11/ai-robot-wallpaper-25.jpg"><span
+lang=EN-US style='color:windowtext'><img border=0 width=357 height=200
+src="Regressões-Lasso-e-Ridget_arquivos/image001.jpg"></span></a></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Quando
+pensamos em regressões lineares, o uso mais comum e conceitual é para previsões
+de acontecimentos futuros. Nessa abordagem, o objetivo principal é encontrar a
+função </span><span
+style='font-size:12.0pt;line-height:115%;font-family:"Aptos",sans-serif;
+position:relative;top:2.5pt'><img width=30 height=29
+src="Regressões-Lasso-e-Ridget_arquivos/image002.png"></span><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif'> que minimize a função
+de risco </span><span
+style='font-size:12.0pt;line-height:115%;font-family:"Aptos",sans-serif;
+position:relative;top:4.0pt'><img width=54 height=32
+src="Regressões-Lasso-e-Ridget_arquivos/image003.png"></span><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif'> e que generalize bem
+para novos dados.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Contudo,
+enfrentamos um problema conceitual com a MSE (Mean Squared Error), que é a
+função de custo mais utilizada. A MSE tende a reduzir-se quando a complexidade
+do modelo aumenta, o que pode levar a um problema de <i>overfitting</i>.
+Overfitting ocorre quando o modelo se ajusta excessivamente aos dados de
+treinamento, perdendo a capacidade de generalizar para novos dados.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Para
+enfrentar o overfitting, aplicamos técnicas como <i>Data Splitting</i> e <i>Cross
+Validation</i>. Essas abordagens ajudam a avaliar o modelo de forma mais
+robusta, separando os dados em conjuntos de treinamento e teste e validando o
+modelo em diferentes subconjuntos dos dados. No entanto, além dessas técnicas,
+é importante lidar com o trade-off entre viés e variância.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>O
+trade-off entre viés e variância refere-se à troca entre a complexidade do
+modelo e sua capacidade de generalização. Modelos mais complexos podem ter
+baixa variância (ou seja, ajustam-se muito bem aos dados de treinamento) mas
+alto viés (ou seja, não generalizam bem para novos dados). Para mitigar isso,
+aplicamos penalidades para reduzir a complexidade do modelo e melhorar sua
+capacidade de generalização.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Quando
+lidamos com conjuntos de dados de alta dimensionalidade, ou seja, com muitas
+variáveis de entrada, a complexidade dos modelos pode causar overfitting devido
+à grande quantidade de features. Nesse contexto, adicionamos parâmetros de
+ajuste, conhecidos como penalidades, às funções de regressão. As duas
+principais penalidades são Lasso (L1) e Ridge (L2).</span></p>
+
+<h3><a name=penalidade-lasso-l1><span lang=EN-US>Penalidade Lasso (L1)</span></a></h3>
+
+<p class=FirstParagraph><span lang=EN-US style='font-size:11.0pt;font-family:
+"Arial",sans-serif'>A penalidade Lasso adiciona um termo de regularização à
+função de custo que penaliza a soma dos valores absolutos dos coeficientes</span><span
+lang=EN-US style='font-size:11.0pt'>:</span></p>
+
+<p class=MsoBodyText><span
+style='font-size:12.0pt;line-height:115%;font-family:"Aptos",sans-serif'><img
+width=231 height=69 src="Regressões-Lasso-e-Ridget_arquivos/image004.png"></span></p>
+
+<p class=FirstParagraph><span lang=EN-US style='font-size:11.0pt;font-family:
+"Arial",sans-serif'>Onde </span><span
+style='font-size:12.0pt;line-height:115%;font-family:"Aptos",sans-serif;
+position:relative;top:2.5pt'><img width=7 height=29
+src="Regressões-Lasso-e-Ridget_arquivos/image005.png"></span><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif'> é o parâmetro de
+regularização que controla a intensidade da penalidade. O efeito principal da
+penalidade Lasso é forçar alguns coeficientes a serem exatamente zero,
+efetivamente realizando seleção de variáveis e reduzindo a complexidade do
+modelo.</span></p>
+
+<h3><a name=penalidade-ridge-l2><span lang=EN-US>Penalidade Ridge (L2)</span></a></h3>
+
+<p class=FirstParagraph><span lang=EN-US style='font-size:11.0pt;font-family:
+"Arial",sans-serif'>A penalidade Ridge adiciona um termo de regularização que
+penaliza a soma dos quadrados dos coeficientes:</span></p>
+
+<p class=MsoBodyText><span
+style='font-size:12.0pt;line-height:115%;font-family:"Aptos",sans-serif'><img
+width=224 height=69 src="Regressões-Lasso-e-Ridget_arquivos/image006.png"></span></p>
+
+<p class=FirstParagraph><span lang=EN-US style='font-size:11.0pt;font-family:
+"Arial",sans-serif'>Aqui, </span><span
+style='font-size:12.0pt;line-height:115%;font-family:"Aptos",sans-serif;
+position:relative;top:2.5pt'><img width=7 height=29
+src="Regressões-Lasso-e-Ridget_arquivos/image005.png"></span><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif'> também controla a
+intensidade da penalidade, mas o Ridge tende a reduzir todos os coeficientes de
+forma mais uniforme, sem forçá-los a zero. Isso ajuda a reduzir a variância do
+modelo sem eliminar completamente variáveis.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Ambas
+as técnicas ajudam a controlar a complexidade do modelo e a melhorar a
+capacidade de generalização ao lidar com dados de alta dimensionalidade. A
+escolha entre Lasso e Ridge depende das características do problema e dos
+objetivos do modelo.</span></p>
+
+<h2><a name=vamos-ver-como-isso-funciona-na-prática><span lang=EN-US>Vamos ver
+como isso funciona na prática</span></a></h2>
+
+<p class=FirstParagraph><span lang=EN-US style='font-size:11.0pt;font-family:
+"Arial",sans-serif'>Seguindo o exemplo do livro “Aprendizado de Máquina - Uma
+abordagem estatística” de Rafael Izbicki (que inclusive recomendo a leitura)
+ele trabalha, <b><i>no cap. 3 parte 3.8 no exemplo 3.3</i></b> com dados da
+Amazon Fine Food Reviews do link </span><a
+href="https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews"><span
+lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews</span></a></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>O
+código começa carregando um conjunto de dados de avaliações a partir de um
+arquivo CSV e seleciona uma amostra aleatória de 20.000 linhas para análise,
+garantindo a reprodutibilidade ao definir uma semente para a amostragem. Em
+seguida, ele cria um corpus de texto a partir da coluna de texto das avaliações
+e constrói uma matriz de documentos e termos (DTM) que representa a frequência
+das palavras em cada documento. Essa matriz é então convertida em uma forma
+esparsa para otimizar o armazenamento, considerando que muitas entradas são
+zero.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Após
+a preparação dos dados, o código divide aleatoriamente os dados em conjuntos de
+treinamento e teste, selecionando 10.000 índices para treinamento. Em relação
+ao tratamento de dados, o código calcula a média dos escores de avaliação,
+ignorando os valores ausentes (NAs), e substitui os NAs nos escores de teste
+por essa média. Esse tratamento é essencial para evitar problemas durante a
+validação do modelo, assegurando que o modelo possa ser avaliado de forma
+eficaz e sem distorções causadas por valores ausentes.</span></p>
+
+<p class=MsoBodyText><b><i><span lang=EN-US style='font-size:11.0pt;font-family:
+"Arial",sans-serif'>Obs: Lembrando que essa parte é dos créditos do professor
+Rafael, eu simplesmente fiz um CTRL-C e CTRL-V</span></i></b></p>
+
+<p class=SourceCode><span class=CommentTok><span lang=EN-US style='font-size:
+11.0pt'># Carregar as bibliotecas necessárias</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>library</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(dplyr)</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## Anexando pacote: 'dplyr'</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Os seguintes objetos são mascarados por 'package:stats':</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>##     filter, lag</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Os seguintes objetos são mascarados por 'package:base':</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>##     intersect, setdiff, setequal, union</span></span></p>
+
+<p class=SourceCode><span class=FunctionTok><span lang=EN-US style='font-size:
+11.0pt'>library</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>(tm)</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Warning: pacote 'tm' foi compilado no R versão 4.4.1</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Carregando pacotes exigidos: NLP</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Warning: pacote 'NLP' foi compilado no R versão 4.4.1</span></span></p>
+
+<p class=SourceCode><span class=FunctionTok><span lang=EN-US style='font-size:
+11.0pt'>library</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>(corrplot)</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## corrplot 0.92 loaded</span></span></p>
+
+<p class=SourceCode><span class=FunctionTok><span lang=EN-US style='font-size:
+11.0pt'>library</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>(car)</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Carregando pacotes exigidos: carData</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## Anexando pacote: 'car'</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## O seguinte objeto é mascarado por 'package:dplyr':</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>##     recode</span></span></p>
+
+<p class=SourceCode><span class=FunctionTok><span lang=EN-US style='font-size:
+11.0pt'>library</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>(ggplot2)</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## Anexando pacote: 'ggplot2'</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## O seguinte objeto é mascarado por 'package:NLP':</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>##     annotate</span></span></p>
+
+<p class=SourceCode><span class=FunctionTok><span lang=EN-US style='font-size:
+11.0pt'>library</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>(glmnet)</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Carregando pacotes exigidos: Matrix</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Loaded glmnet 4.1-8</span></span></p>
+
+<p class=SourceCode><span class=FunctionTok><span lang=EN-US style='font-size:
+11.0pt'>library</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>(patchwork)</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>library</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(tidyr)</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## Anexando pacote: 'tidyr'</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Os seguintes objetos são mascarados por
+'package:Matrix':</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>##     expand, pack, unpack</span></span></p>
+
+<p class=SourceCode><span class=FunctionTok><span lang=EN-US style='font-size:
+11.0pt'>library</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>(reshape2)</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## Anexando pacote: 'reshape2'</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## O seguinte objeto é mascarado por 'package:tidyr':</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>##     smiths</span></span></p>
+
+<p class=SourceCode><span class=FunctionTok><span lang=EN-US style='font-size:
+11.0pt'>library</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>(gridExtra)</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## Anexando pacote: 'gridExtra'</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## O seguinte objeto é mascarado por 'package:dplyr':</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>##     combine</span></span></p>
+
+<p class=SourceCode><span class=CommentTok><span lang=EN-US style='font-size:
+11.0pt'># Ler os dados da amostra</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>dados </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>read.csv</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>'Reviews.csv'</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>header =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=ConstantTok><span lang=EN-US style='font-size:11.0pt'>TRUE</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Selecionar uma amostra dos dados</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>set.seed</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>1</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>selecao </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>sample</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>nrow</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(dados), </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>20000</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>) </span></span><span
+class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#selecionando uma
+amostra dos dados</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>dados </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> dados[selecao,]</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'># Criar
+a matriz de preditoras (Document-Term Matrix)</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>corp </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>VCorpus</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>VectorSource</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(dados</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>Text))</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>dtm </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>DocumentTermMatrix</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(corp,</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>                          </span></span><span class=AttributeTok><span
+lang=EN-US style='font-size:11.0pt'>control =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>list</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>tolower =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=ConstantTok><span lang=EN-US style='font-size:11.0pt'>TRUE</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>,</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>                                         </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>stemming =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=ConstantTok><span lang=EN-US style='font-size:11.0pt'>FALSE</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>,</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>                                         </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>removeNumbers =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=ConstantTok><span lang=EN-US style='font-size:11.0pt'>TRUE</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>,</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>                                         </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>removePunctuation
+=</span></span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'> </span></span><span class=ConstantTok><span lang=EN-US
+style='font-size:11.0pt'>TRUE</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>,</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>                                         </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>removeStripwhitespace
+=</span></span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'> </span></span><span class=ConstantTok><span lang=EN-US
+style='font-size:11.0pt'>TRUE</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>,</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>                                         </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>weighting =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>
+weightTf))</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>dtmMatrix </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>sparseMatrix</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>i =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> dtm</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>i, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>j =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> dtm</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>j, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>x =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> dtm</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>v,</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>                          </span></span><span class=AttributeTok><span
+lang=EN-US style='font-size:11.0pt'>dimnames =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>list</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=ConstantTok><span lang=EN-US style='font-size:11.0pt'>NULL</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, dtm</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>dimnames[[</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>2</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>]]),</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>                          </span></span><span class=AttributeTok><span
+lang=EN-US style='font-size:11.0pt'>dims =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>c</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(dtm</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>nrow, dtm</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>ncol))</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>dim</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(dtmMatrix)</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## [1] 20000 35514</span></span></p>
+
+<p class=SourceCode><span class=NormalTok><span lang=EN-US style='font-size:
+11.0pt;color:black'>tr </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>sample.int</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>length</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(selecao),
+</span></span><span class=DecValTok><span lang=EN-US style='font-size:11.0pt'>10000</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>replace =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=ConstantTok><span lang=EN-US style='font-size:11.0pt'>FALSE</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Calcular a média ignorando os NAs -&gt; Esses valors atrapalham validações</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>media_score </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>mean</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(dados</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>Score[</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>tr], </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>na.rm =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=ConstantTok><span lang=EN-US style='font-size:11.0pt'>TRUE</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Substituir os NAs pela média calculada</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>dados</span></span><span class=SpecialCharTok><span lang=EN-US
+style='font-size:11.0pt'>$</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>Score[</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>tr][</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>is.na</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(dados</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>Score[</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>tr])] </span></span><span
+class=OtherTok><span lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>
+media_score</span></span></p>
+
+<p class=FirstParagraph><span lang=EN-US style='font-size:11.0pt;font-family:
+"Arial",sans-serif'>Veja a matriz criada, tendo mais de 35mil features (termos)
+e 20mil instâncias</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Aqui
+</span><span
+style='font-size:12.0pt;line-height:115%;font-family:"Aptos",sans-serif;
+position:relative;top:2.5pt'><img width=37 height=29
+src="Regressões-Lasso-e-Ridget_arquivos/image007.png"></span><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif'> mostra a imensa
+dimensionalidade causada de forma proposital.</span></p>
+
+<h4><a name=criação-de-modelos-de-regressão><span lang=EN-US>Criação de Modelos
+de Regressão</span></a></h4>
+
+<p class=FirstParagraph><span lang=EN-US style='font-size:11.0pt;font-family:
+"Arial",sans-serif'>Neste segmento, o autor desenvolve três modelos de
+regressão: um modelo baseado em Mínimos Quadrados Ordinários (MQO), um modelo
+de Ridge e um modelo de Lasso.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Primeiramente,
+é criado um modelo de regressão linear simples utilizando MQO. Em seguida, o
+autor adapta o modelo para incorporar penalidades Ridge e Lasso. A aplicação da
+penalidade Ridge envolve a adição de um termo de regularização baseado na soma
+dos quadrados dos coeficientes, enquanto a penalidade Lasso adiciona um termo
+de regularização baseado na soma dos valores absolutos dos coeficientes.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Após
+a construção dos modelos, realiza-se a previsão para cada um deles. É
+importante notar que o pacote <span class=VerbatimChar><span style='font-family:
+"Arial",sans-serif'>glmnet</span></span> utiliza validação cruzada para
+determinar automaticamente o valor ideal do parâmetro de ajuste, </span><span
+style='font-size:12.0pt;line-height:115%;font-family:"Aptos",sans-serif;
+position:relative;top:2.5pt'><img width=7 height=29
+src="Regressões-Lasso-e-Ridget_arquivos/image005.png"></span><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif'>. No entanto, em seções
+subsequentes, abordaremos a metodologia para selecionar esse parâmetro de forma
+manual, permitindo uma compreensão mais profunda do processo de ajuste dos
+modelos</span></p>
+
+<p class=SourceCode><span class=CommentTok><span lang=EN-US style='font-size:
+11.0pt'># Ajuste dos modelos de regressão</span></span><span lang=EN-US
+style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Modelo MQO (Mínimos Quadrados Ordinários)</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>ajuste_mq </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>glmnet</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(dtmMatrix[tr,],
+dados</span></span><span class=SpecialCharTok><span lang=EN-US
+style='font-size:11.0pt'>$</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>Score[tr], </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>alpha =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>0</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>lambda =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>0</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>predito_mq </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>predict</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(ajuste_mq,
+</span></span><span class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>newx
+=</span></span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'> dtmMatrix[</span></span><span class=SpecialCharTok><span
+lang=EN-US style='font-size:11.0pt'>-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>tr,])</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Modelo Ridge</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>ridge </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>cv.glmnet</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(dtmMatrix[tr,],
+dados</span></span><span class=SpecialCharTok><span lang=EN-US
+style='font-size:11.0pt'>$</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>Score[tr], </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>alpha =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>0</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>predito_ridge </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>predict</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(ridge, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>s =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> ridge</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>lambda.min,
+</span></span><span class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>newx
+=</span></span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'> dtmMatrix[</span></span><span class=SpecialCharTok><span
+lang=EN-US style='font-size:11.0pt'>-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>tr,])</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Modelo Lasso</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>lasso </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>cv.glmnet</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(dtmMatrix[tr,],
+dados</span></span><span class=SpecialCharTok><span lang=EN-US
+style='font-size:11.0pt'>$</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>Score[tr], </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>alpha =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>1</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>predito_lasso </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>predict</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(lasso, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>s =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> lasso</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>lambda.min,
+</span></span><span class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>newx
+=</span></span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'> dtmMatrix[</span></span><span class=SpecialCharTok><span
+lang=EN-US style='font-size:11.0pt'>-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>tr,])</span></span></p>
+
+<p class=FirstParagraph><span lang=EN-US style='font-size:11.0pt;font-family:
+"Arial",sans-serif'>Agora vamos montar uma tabela cruzando dados previstos com
+dados reais para encontrarmos os resultados resíduais de todos os três modelos.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>A
+partir daqui eu apenas me inspirei no livro, porém os códigos são de autoria
+própria</span></p>
+
+<p class=SourceCode><span class=CommentTok><span lang=EN-US style='font-size:
+11.0pt'># Função para calcular o EQM e o erro padrão com tratamento de NA</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>calcular_metrica_eficiente </span></span><span class=OtherTok><span
+lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=ControlFlowTok><span lang=EN-US style='font-size:11.0pt'>function</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(predito,
+real) {</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=CommentTok><span lang=EN-US
+style='font-size:11.0pt'># Remover valores NA</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  predito </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>na.omit</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(predito)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  real </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>na.omit</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(real)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=CommentTok><span lang=EN-US
+style='font-size:11.0pt'># Verificar se os vetores têm o mesmo comprimento</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=ControlFlowTok><span lang=EN-US
+style='font-size:11.0pt'>if</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> (</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>length</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(predito)
+</span></span><span class=SpecialCharTok><span lang=EN-US style='font-size:
+11.0pt'>!=</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'> </span></span><span class=FunctionTok><span
+lang=EN-US style='font-size:11.0pt'>length</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(real)) {</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>    </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>stop</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Os vetores
+'predito' e 'real' têm comprimentos diferentes.&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  }</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=CommentTok><span lang=EN-US
+style='font-size:11.0pt'># Calcular o erro e as métricas</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  erro </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> (predito </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> real)</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>^</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>2</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  eqm </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>mean</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(erro)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  erro_padrao </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>sd</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(erro) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>/</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>sqrt</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>length</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(erro))</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>return</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>c</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(eqm,
+erro_padrao))</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>}</span></span><span lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Calcular métricas para cada modelo</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>metrica_mqo </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>calcular_metrica_eficiente</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>as.vector</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(predito_mq),
+dados</span></span><span class=SpecialCharTok><span lang=EN-US
+style='font-size:11.0pt'>$</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>Score[</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>tr])</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>metrica_lasso </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>calcular_metrica_eficiente</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>as.vector</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(predito_lasso),
+dados</span></span><span class=SpecialCharTok><span lang=EN-US
+style='font-size:11.0pt'>$</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>Score[</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>tr])</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>metrica_ridge </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>calcular_metrica_eficiente</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>as.vector</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(predito_ridge),
+dados</span></span><span class=SpecialCharTok><span lang=EN-US
+style='font-size:11.0pt'>$</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>Score[</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>tr])</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'># Criar
+a tabela de métricas</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>tabela_metricas </span></span><span class=OtherTok><span
+lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>data.frame</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=AttributeTok><span lang=EN-US
+style='font-size:11.0pt'>Modelo =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>c</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;MQO&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Lasso&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Ridge&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>),</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=AttributeTok><span lang=EN-US
+style='font-size:11.0pt'>EQM =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>c</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(metrica_mqo[</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>1</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>],
+metrica_lasso[</span></span><span class=DecValTok><span lang=EN-US
+style='font-size:11.0pt'>1</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>], metrica_ridge[</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>1</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>]),</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=AttributeTok><span lang=EN-US
+style='font-size:11.0pt'>Erro_Padrao =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>c</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(metrica_mqo[</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>2</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>],
+metrica_lasso[</span></span><span class=DecValTok><span lang=EN-US
+style='font-size:11.0pt'>2</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>], metrica_ridge[</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>2</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>])</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>)</span></span><span lang=EN-US style='color:black'><br>
+<br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>tabela_metricas</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>##   Modelo      EQM Erro_Padrao</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## 1    MQO 7.722554  0.22488391</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## 2  Lasso 1.101487  0.02063685</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## 3  Ridge 1.161883  0.02113314</span></span></p>
+
+<p class=FirstParagraph><span lang=EN-US style='font-size:11.0pt;font-family:
+"Arial",sans-serif'>Desempenho do Modelo Lasso</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>O
+modelo Lasso demonstrou ser o mais eficaz entre os três analisados. O Lasso
+aplica uma penalidade à função de custo que é proporcional à soma das
+magnitudes dos coeficientes multiplicados pelo parâmetro de ajuste </span><span
+style='font-size:12.0pt;line-height:115%;font-family:"Aptos",sans-serif;
+position:relative;top:2.5pt'><img width=7 height=29
+src="Regressões-Lasso-e-Ridget_arquivos/image005.png"></span><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif'>. Esta abordagem é
+particularmente vantajosa em cenários de alta dimensionalidade, pois tem a
+capacidade de eliminar features irrelevantes de maneira mais assertiva.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Embora
+o modelo Ridge também tenha mostrado um desempenho próximo, o Lasso apresentou
+uma vantagem significativa ao reduzir mais efetivamente o número de features.
+No entanto, essa eliminação excessiva de features pode, às vezes, impactar
+negativamente a capacidade de generalização do modelo para novos dados, já que
+o Lasso tende a promover um maior número de coeficientes zero comparado ao
+Ridge.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Portanto,
+enquanto o Lasso é eficaz na seleção de features e na redução da
+dimensionalidade, é crucial balancear essa seleção com a necessidade de manter
+a capacidade preditiva do modelo.</span></p>
+
+<p class=SourceCode><span class=CommentTok><span lang=EN-US style='font-size:
+11.0pt'># Transformar a tabela em formato longo</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>tabela_metricas_long </span></span><span class=OtherTok><span
+lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>melt</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(tabela_metricas,
+</span></span><span class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>id.vars
+=</span></span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'> </span></span><span class=StringTok><span lang=EN-US
+style='font-size:11.0pt'>&quot;Modelo&quot;</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>variable.name =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Métrica&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>value.name =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Valor&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Garantir que os modelos apareçam na ordem desejada</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>tabela_metricas_long</span></span><span class=SpecialCharTok><span
+lang=EN-US style='font-size:11.0pt'>$</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>Modelo </span></span><span
+class=OtherTok><span lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>factor</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(tabela_metricas_long</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>Modelo, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>levels =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>c</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;MQO&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Lasso&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Ridge&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>))</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Plotar o gráfico de barras com valores</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>ggplot</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(tabela_metricas_long,
+</span></span><span class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>aes</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>x =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> Modelo, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>y =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> Valor, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>fill =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>
+Métrica)) </span></span><span class=SpecialCharTok><span lang=EN-US
+style='font-size:11.0pt'>+</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>geom_bar</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>stat =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;identity&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>position =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;dodge&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>geom_text</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>aes</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>label =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>round</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(Valor, </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>2</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)), </span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>            </span></span><span class=AttributeTok><span
+lang=EN-US style='font-size:11.0pt'>position =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>position_dodge</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>width =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FloatTok><span lang=EN-US style='font-size:11.0pt'>0.9</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>), </span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>            </span></span><span class=AttributeTok><span
+lang=EN-US style='font-size:11.0pt'>vjust =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=FloatTok><span lang=EN-US style='font-size:11.0pt'>0.5</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>size =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>4</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>labs</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>title =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Comparação de
+Métricas dos Modelos&quot;</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>, </span></span><span class=AttributeTok><span
+lang=EN-US style='font-size:11.0pt'>x =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Modelo&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>y =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Valor&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>scale_fill_manual</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>values =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>c</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;EQM&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=OtherTok><span lang=EN-US style='font-size:11.0pt'>=</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;cornflowerblue&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Erro_Padrao&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=OtherTok><span lang=EN-US style='font-size:11.0pt'>=</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;tomato2&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>theme_classic</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>()</span></span></p>
+
+<p class=FirstParagraph><span lang=EN-US><img border=0 width=485 height=388
+src="Regressões-Lasso-e-Ridget_arquivos/image008.png"></span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Vamos
+dar uma breve olhada para quais palavras apresentam maior importância para a
+previsão no nosso modelo Lasso. Quanto maior o coeficiente melhor e mais
+importante ele se torna à previsão</span></p>
+
+<p class=SourceCode><span class=CommentTok><span lang=EN-US style='font-size:
+11.0pt'># Obtenha os coeficientes do Lasso e remova o intercepto</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>coeficientes_lasso </span></span><span class=OtherTok><span
+lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>as.matrix</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>coef</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(lasso, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>s =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> lasso</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>lambda.min))</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>coeficientes_lasso </span></span><span class=OtherTok><span
+lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> coeficientes_lasso[</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>1</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, , drop </span></span><span
+class=OtherTok><span lang=EN-US style='font-size:11.0pt'>=</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=ConstantTok><span lang=EN-US style='font-size:11.0pt'>FALSE</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>]  </span></span><span
+class=CommentTok><span lang=EN-US style='font-size:11.0pt'># Remover o
+intercepto</span></span><span lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Converter em dataframe e adicionar os nomes das palavras</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>coeficientes_lasso_df </span></span><span class=OtherTok><span
+lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>data.frame</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=AttributeTok><span lang=EN-US
+style='font-size:11.0pt'>Palavra =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>rownames</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(coeficientes_lasso),</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=AttributeTok><span lang=EN-US
+style='font-size:11.0pt'>Coeficiente =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> coeficientes_lasso[, </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>1</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>]</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>)</span></span><span lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Separar em positivos e negativos</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>coeficientes_positivos </span></span><span class=OtherTok><span
+lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> coeficientes_lasso_df </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>%&gt;%</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>filter</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(Coeficiente </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>&gt;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>0</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>%&gt;%</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>arrange</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>desc</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(Coeficiente))</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>coeficientes_negativos </span></span><span class=OtherTok><span
+lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> coeficientes_lasso_df </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>%&gt;%</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>filter</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(Coeficiente </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>&lt;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>0</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>%&gt;%</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>arrange</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(Coeficiente)</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'># Gerar
+gráfico para coeficientes positivos</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>grafico_positivos </span></span><span class=OtherTok><span
+lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>ggplot</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(coeficientes_positivos[</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>1</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>:</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>20</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, ], </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>aes</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>x =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>
+Coeficiente, </span></span><span class=AttributeTok><span lang=EN-US
+style='font-size:11.0pt'>y =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>reorder</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(Palavra,
+Coeficiente))) </span></span><span class=SpecialCharTok><span lang=EN-US
+style='font-size:11.0pt'>+</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>geom_col</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>fill =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;cornflowerblue&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>labs</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>x =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Coeficiente
+Lasso&quot;</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>, </span></span><span class=AttributeTok><span
+lang=EN-US style='font-size:11.0pt'>title =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Coeficientes
+Positivos&quot;</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>theme_classic</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>()</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'># Gerar
+gráfico para coeficientes negativos</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>grafico_negativos </span></span><span class=OtherTok><span
+lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>ggplot</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(coeficientes_negativos[</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>1</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>:</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>20</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, ], </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>aes</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>x =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>
+Coeficiente, </span></span><span class=AttributeTok><span lang=EN-US
+style='font-size:11.0pt'>y =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>reorder</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(Palavra,
+Coeficiente))) </span></span><span class=SpecialCharTok><span lang=EN-US
+style='font-size:11.0pt'>+</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>geom_col</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>fill =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;tomato&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>labs</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>x =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Coeficiente
+Lasso&quot;</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>, </span></span><span class=AttributeTok><span
+lang=EN-US style='font-size:11.0pt'>title =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Coeficientes
+Negativos&quot;</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>theme_classic</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>()</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Colocar os gráficos lado a lado</span></span><span lang=EN-US style='color:
+black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>grafico_positivos </span></span><span class=SpecialCharTok><span
+lang=EN-US style='font-size:11.0pt'>+</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> grafico_negativos</span></span></p>
+
+<p class=FirstParagraph><span lang=EN-US><img border=0 width=485 height=388
+src="Regressões-Lasso-e-Ridget_arquivos/image009.png"></span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Veja
+como temos boas features mas a partir da décima quinta ou vigésima feature seu
+coef se aproxima de 0. Aqui mostramos apenas 20, mas lembre-se que são muito
+mais de 20, veja que quanto mais features acrescentamos, menos importância
+algumas tem, considerar modelos de regressão com as mesmas infla e gera
+overfitting no modelo piorando sua previsão.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Poderíamos
+considerar isso em regressões inferenciais, visto que a ideia não é predizer
+valores futuros mas avaliar uma regressão “real” do modelo e verificar o
+cruzamento das features com seus rótulos.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Por
+fim, como prometido, vou te mostrar um pouco de como selecionar bons valores de
+tuning params ou o lambda</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Para
+isso, vamos criar uma lista de diversos valores de lambda e calcular, para
+cada, a função de risco. Desses resultados, vamos plotar uma curva para
+representar os resultados.</span></p>
+
+<p class=SourceCode><span class=CommentTok><span lang=EN-US style='font-size:
+11.0pt'># Definir a sequência de valores de lambda</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>lambda_seq </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>seq</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>0</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>1</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>by =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FloatTok><span lang=EN-US style='font-size:11.0pt'>0.1</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Ajustar o modelo com glmnet para cada valor de lambda</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>lasso_model </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>glmnet</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(dtmMatrix[tr,],
+dados</span></span><span class=SpecialCharTok><span lang=EN-US
+style='font-size:11.0pt'>$</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>Score[tr], </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>alpha =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>1</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>lambda =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>
+lambda_seq)</span></span><span lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Realizar a validação cruzada e calcular o erro de previsão e penalidade</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>mse_penalidade </span></span><span class=OtherTok><span
+lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>numeric</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>length</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(lambda_seq))</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=ControlFlowTok><span lang=EN-US style='font-size:11.0pt'>for</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> (i </span></span><span
+class=ControlFlowTok><span lang=EN-US style='font-size:11.0pt'>in</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>1</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>:</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>length</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(lambda_seq))
+{</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=CommentTok><span lang=EN-US
+style='font-size:11.0pt'># Prever usando o valor de lambda</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  predito </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>predict</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(lasso_model,
+</span></span><span class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>s
+=</span></span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'> lambda_seq[i], </span></span><span class=AttributeTok><span
+lang=EN-US style='font-size:11.0pt'>newx =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> dtmMatrix[</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>tr,])</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=CommentTok><span lang=EN-US
+style='font-size:11.0pt'># Calcular o erro de previsão (MSE)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  erro </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>mean</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>((dados</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>Score[</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>tr] </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> predito)</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>^</span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>2</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=CommentTok><span lang=EN-US
+style='font-size:11.0pt'># Calcular a penalidade</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  penalidade </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> lambda_seq[i] </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>*</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>sum</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>coef</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(lasso_model,
+</span></span><span class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>s
+=</span></span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'> lambda_seq[i])[</span></span><span class=SpecialCharTok><span
+lang=EN-US style='font-size:11.0pt'>-</span></span><span class=DecValTok><span
+lang=EN-US style='font-size:11.0pt'>1</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>] </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>!=</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>0</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=CommentTok><span lang=EN-US
+style='font-size:11.0pt'># Calcular a função de risco (MSE + Penalidade)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  mse_penalidade[i] </span></span><span class=OtherTok><span
+lang=EN-US style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> erro </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>
+penalidade</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>}</span></span><span lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'># Criar
+um data frame para plotagem</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>resultados </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>data.frame</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=AttributeTok><span lang=EN-US
+style='font-size:11.0pt'>Lambda =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> lambda_seq,</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=AttributeTok><span lang=EN-US
+style='font-size:11.0pt'>Funcao_Risco =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> mse_penalidade</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>)</span></span><span lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'># Encontrar
+o valor mínimo da função de risco e o correspondente lambda</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>indice_min </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>which.min</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(resultados</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>Funcao_Risco)</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>lambda_min </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> resultados</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>Lambda[indice_min]</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>risco_min </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> resultados</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>Funcao_Risco[indice_min]</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Plotar o gráfico com linha azul e suavização</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>ggplot</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(resultados,
+</span></span><span class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>aes</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>x =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> Lambda, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>y =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>
+Funcao_Risco)) </span></span><span class=SpecialCharTok><span lang=EN-US
+style='font-size:11.0pt'>+</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>geom_line</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>color =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;lightblue&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>size =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FloatTok><span lang=EN-US style='font-size:11.0pt'>0.8</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>  </span></span><span
+class=CommentTok><span lang=EN-US style='font-size:11.0pt'># Linha azul</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>geom_vline</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>xintercept =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>
+lambda_min, </span></span><span class=AttributeTok><span lang=EN-US
+style='font-size:11.0pt'>linetype =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;dashed&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>color =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;tomato&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>  </span></span><span
+class=CommentTok><span lang=EN-US style='font-size:11.0pt'># Linha vertical
+tracejada</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>geom_text</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>aes</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>x =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> lambda_min</span></span><span
+class=FloatTok><span lang=EN-US style='font-size:11.0pt'>+0.15</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>y =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>
+risco_min, </span></span><span class=AttributeTok><span lang=EN-US
+style='font-size:11.0pt'>label =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>sprintf</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Lambda =
+%.1f&quot;</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>, lambda_min)), </span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>            </span></span><span class=AttributeTok><span
+lang=EN-US style='font-size:11.0pt'>vjust =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>-</span></span><span
+class=FloatTok><span lang=EN-US style='font-size:11.0pt'>0.5</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>hjust =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FloatTok><span lang=EN-US style='font-size:11.0pt'>1.1</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>color =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;tomato&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>size =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=DecValTok><span lang=EN-US style='font-size:11.0pt'>3</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>  </span></span><span
+class=CommentTok><span lang=EN-US style='font-size:11.0pt'># Rótulo</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>labs</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>x =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Lambda&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+class=AttributeTok><span lang=EN-US style='font-size:11.0pt'>y =</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Função de Risco
+(MSE + Penalidade (P0))&quot;</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>, </span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>       </span></span><span class=AttributeTok><span lang=EN-US
+style='font-size:11.0pt'>title =</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Função de Risco
+vs Lambda para Lasso&quot;</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>) </span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>+</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>  </span></span><span class=FunctionTok><span lang=EN-US
+style='font-size:11.0pt'>theme_classic</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>()</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Warning: Using `size` aesthetic for lines was deprecated
+in ggplot2 3.4.0.</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## &#8505; Please use `linewidth` instead.</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## This warning is displayed once every 8 hours.</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## Call `lifecycle::last_lifecycle_warnings()` to see where this
+warning was</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## generated.</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Warning in geom_text(aes(x = lambda_min + 0.15, y =
+risco_min, label = sprintf(&quot;Lambda = %.1f&quot;, : All aesthetics have
+length 1, but the data has 11 rows.</span></span><span lang=EN-US
+style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>## &#8505; Please consider using `annotate()` or provide this layer
+with data containing</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=VerbatimChar><span lang=EN-US style='font-size:11.0pt;
+color:black'>##   a single row.</span></span></p>
+
+<p class=FirstParagraph><span lang=EN-US><img border=0 width=485 height=388
+src="Regressões-Lasso-e-Ridget_arquivos/image010.png"></span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Sendo
+que o Lasso utilizado pelo glmnet foi:</span></p>
+
+<p class=SourceCode><span class=CommentTok><span lang=EN-US style='font-size:
+11.0pt'># Obtém o lambda que minimiza o erro de validação cruzada</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>lambda_min </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> lasso</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>lambda.min</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'># Obtém
+o lambda com o menor erro de validação cruzada mais um desvio padrão</span></span><span
+lang=EN-US style='color:black'><br>
+</span><span class=NormalTok><span lang=EN-US style='font-size:11.0pt;
+color:black'>lambda_1se </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> lasso</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>$</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>lambda</span></span><span
+class=FloatTok><span lang=EN-US style='font-size:11.0pt'>.1</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>se</span></span><span
+lang=EN-US style='color:black'><br>
+<br>
+</span><span class=CommentTok><span lang=EN-US style='font-size:11.0pt'>#
+Imprime os valores de lambda</span></span><span lang=EN-US style='color:black'><br>
+</span><span class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>cat</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(</span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;Lambda que
+minimiza o erro de validação cruzada:&quot;</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>, lambda_min, </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>\n</span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Lambda que minimiza o erro de validação cruzada:
+0.02041104</span></span></p>
+
+<p class=SourceCode><span class=FunctionTok><span lang=EN-US style='font-size:
+11.0pt'>cat</span></span><span class=NormalTok><span lang=EN-US
+style='font-size:11.0pt;color:black'>(</span></span><span class=StringTok><span
+lang=EN-US style='font-size:11.0pt'>&quot;Lambda com o menor erro de validação
+cruzada mais um desvio padrão:&quot;</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'>, lambda_1se, </span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;</span></span><span
+class=SpecialCharTok><span lang=EN-US style='font-size:11.0pt'>\n</span></span><span
+class=StringTok><span lang=EN-US style='font-size:11.0pt'>&quot;</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>)</span></span></p>
+
+<p class=SourceCode><span class=VerbatimChar><span lang=EN-US style='font-size:
+11.0pt;color:black'>## Lambda com o menor erro de validação cruzada mais um
+desvio padrão: 0.02826697</span></span></p>
+
+<p class=FirstParagraph><span lang=EN-US style='font-size:11.0pt;font-family:
+"Arial",sans-serif'>Assim, podemos ver o quão benéfico é as regularizações de
+Lasso e Ridget para datasets de alta dimensão.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Comumente
+é recomendado o uso da Regressão de Ridge, porém caso acredite que tenham
+features que não são importantes, a Lasso ou Elastic Net (uma soma das
+regularizações de Lasso e Ridget) são as mais recomendadas, sendo a Elastic Net
+mais recomendado.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>/<i>——————————————————————————————-</i>/</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Para
+um bônus vou te mostrar uma forma interessante de plotar esses gráficos de
+Tuning x MSE</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif'>Basta
+usar o plot(modelo_lasso ou modelo_ridge). Veja que legal: (Só cuidado que
+nesse caso o eixo x é a função log de lambda)</span></p>
+
+<p class=SourceCode><span class=NormalTok><span lang=EN-US style='font-size:
+11.0pt;color:black'>plot1 </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>plot</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(lasso)</span></span></p>
+
+<p class=FirstParagraph><span lang=EN-US><img border=0 width=485 height=388
+src="Regressões-Lasso-e-Ridget_arquivos/image011.png"></span></p>
+
+<p class=SourceCode><span class=NormalTok><span lang=EN-US style='font-size:
+11.0pt;color:black'>plot2 </span></span><span class=OtherTok><span lang=EN-US
+style='font-size:11.0pt'>&lt;-</span></span><span class=NormalTok><span
+lang=EN-US style='font-size:11.0pt;color:black'> </span></span><span
+class=FunctionTok><span lang=EN-US style='font-size:11.0pt'>plot</span></span><span
+class=NormalTok><span lang=EN-US style='font-size:11.0pt;color:black'>(ridge)</span></span></p>
+
+<p class=FirstParagraph><span lang=EN-US><img border=0 width=485 height=388
+src="Regressões-Lasso-e-Ridget_arquivos/image012.png"></span></p>
+
+<p class=FirstParagraph><span lang=EN-US><img border=0 width=485 height=388
+id=Picture src="Regressões-Lasso-e-Ridget_arquivos/image013.png"></span></p>
+
+</div>
+
+</body>
+
+</html>
