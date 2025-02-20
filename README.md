@@ -34,6 +34,29 @@ This project serves as a deep dive into neural network fundamentals, focusing on
   </a>
 </p>
 
+
+
+- ### Decision Tree with Numpy
+
+I built a Decision Tree from scratch using only NumPy to test the simplicity of the algorithm. The implementation follows a recursive approach, selecting the best splits based on purity measures. Despite its simplicity, the model performed well on datasets from Scikit-Learn, demonstrating that even a basic implementation can yield solid results
+
+<p align="center">
+  <a href="https://github.com/velosoberti/creative_tests/tree/main/DECISION_TREE_NUMP" style="
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: 2px solid #800080;
+    border-radius: 5px;
+    text-decoration: none;
+  ">
+    Click Here
+  </a>
+</p>
+
+
 - ### Simple Linear Regression Manual Function*
 
 #### In this work, I developed a new Python class with various functions to construct and evaluate a linear regression model using two arrays: x and y.
